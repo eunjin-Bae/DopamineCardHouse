@@ -1,5 +1,5 @@
 html, body {
-  background-color: #7c7c7c;
+  background-color: #ffffff;
   font-family: 'Noto Sans KR', sans-serif;
   color: #000000;
   width: 100%;
@@ -7,10 +7,13 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
 html, body {
   background-color: #ffffff;
   color: #000000;
 }
+
+
 h1, .card, .sticky-background, .start-screen, .end-screen {
   font-family: 'Noto Sans KR', sans-serif;
 }
@@ -34,7 +37,7 @@ h1, .card, .sticky-background, .start-screen, .end-screen {
   align-items: center; /* 수직 중앙 정렬 */
   padding: 50px;
   background-color: #ffffff; /* 하얀색*/
-  color: #333; /* 텍스트 색상 */
+  color: #ffffff; /* 텍스트 색상 */
   text-align: center;
   min-height: 100vh; /* 페이지 높이 */
 }
@@ -342,7 +345,12 @@ h1, .card, .sticky-background, .start-screen, .end-screen {
   width: 18vw;
   height: 24vw;
   z-index: 11; /* 오버레이보다 높은 우선순위 */
-  background-image: url('images/img7.png')
+  background-image: url('images/img_heart.png');
+  background-size: contain; /* 요소 내부에 완전히 들어가게 조정 */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #ffc5c5;
+  font-size: 0.8vw;
 }
 
 .new-page-section-2 {
@@ -375,11 +383,11 @@ h1, .card, .sticky-background, .start-screen, .end-screen {
 
 
 .new-page-section-2 h2 {
-  font-size: 3rem; /* 제목 크기를 더 크게 */
+  font-size: 1.8vw; /* 제목 크기를 더 크게 */
 }
 
 .new-page-section-2 p {
-  font-size: 1.5rem; /* 본문 크기를 더 크게 */
+  font-size: 1.2vw; /* 본문 크기를 더 크게 */
 }
 
 .new-page-section-2 {
@@ -393,13 +401,31 @@ h1, .card, .sticky-background, .start-screen, .end-screen {
 .image-box {
   width: 40%; /* 이미지 박스의 너비 */
   display: flex;
+  align-items: center;
   justify-content: center;
+  margin-left: 25px; /* 왼쪽 여백을 추가하여 오른쪽으로 이동 */
 }
 
 .image-box img {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
+}
+
+.animated-image {
+  width: 80%; /* 이미지 크기 조정 */
+  height: auto;
+  animation: scaleBounce 2s infinite; /* 커졌다가 작아지는 애니메이션 적용 */
+}
+
+/* 커졌다가 작아지는 애니메이션 정의 */
+@keyframes scaleBounce {
+  0%, 100% {
+    transform: scale(1); /* 원래 크기 */
+  }
+  50% {
+    transform: scale(1.1); /* 10% 커짐 */
+  }
 }
 
 .text-box {
@@ -475,58 +501,51 @@ h1, .card, .sticky-background, .start-screen, .end-screen {
 
 .scroll-downs {
   position: absolute;
-  bottom: 25%; /* 화면 하단에서 20px 위로 */
+  bottom: 20%; /* 화면 하단에서 25% 위로 */
   left: 50%; /* 화면 중앙 */
   transform: translateX(-50%); /* 중앙 정렬 */
   
-  width: 34px;
-  height: 55px;
+  width: clamp(20px, 4vw, 34px); /* 최소 20px, 최대 34px */
+  height: clamp(30px, 6.5vh, 55px); /* 최소 30px, 최대 55px */
 }
 
 .mousey {
-  position: relative; /* 부모 요소에 상대 위치 설정 */
-  width: 3px;
-  padding: 10px 15px;
-  height: 35px;
-  border: 2px solid black;
+  position: relative;
+  width: clamp(2px, 0.3vw, 3px); /* 최소 2px, 최대 3px */
+  padding: clamp(5px, 1vh, 10px) clamp(10px, 1.5vw, 15px); /* 최소 및 최대 패딩 */
+  height: clamp(20px, 4vh, 35px); /* 최소 20px, 최대 35px */
+  border: clamp(1px, 0.2vw, 2px) solid black;
   border-radius: 25px;
   opacity: 0.75;
   box-sizing: content-box;
 }
+
 .scroller {
-  position: absolute; /* 부모 요소 내에서 절대 위치 설정 */
-  transform: translateX(-50%); /* 정확한 중앙 정렬 */
-  width: 5px;
-  height: 10px;
+  position: absolute;
+  transform: translateX(-50%);
+  width: clamp(3px, 0.5vw, 5px); /* 최소 3px, 최대 5px */
+  height: clamp(5px, 1.5vh, 10px); /* 최소 5px, 최대 10px */
   border-radius: 25%;
   background-color: black;
   animation-name: scroll;
   animation-duration: 2.2s;
-  animation-timing-function: cubic-bezier(.15,.41,.69,.94);
+  animation-timing-function: cubic-bezier(.15, .41, .69, .94);
   animation-iteration-count: infinite;
 }
 
 @keyframes scroll {
   0% {
     opacity: 0;
-    transform: translateY(0); /* 수평 위치 고정 */
+    transform: translateY(0);
   }
   10% {
     opacity: 1;
-    transform: translateY(0); /* 수평 위치 고정 */
+    transform: translateY(0);
   }
   100% {
     opacity: 0;
-    transform: translateY(15px); /* 수평 위치 고정하고 아래로 이동 */
+    transform: translateY(clamp(10px, 2vh, 15px)); /* 최소 10px, 최대 15px */
   }
 }
 
-.card-box {
-  display: flex;
-  justify-content: flex-start; /* 적당히 오른쪽으로 이동 */
-  margin-left: 20%; /* 카드 박스의 위치 조정 */
-  padding: 10px;
-  width: 50%; /* 너비를 늘려 카드 크기를 키움 */
-  position: relative; /* 다른 요소들과의 겹침 방지 */
-  z-index: 1; /* 카드 박스를 다른 요소들 위에 위치 */
-}
+
